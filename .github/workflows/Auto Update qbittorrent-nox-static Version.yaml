@@ -124,7 +124,7 @@ jobs:
           echo "    Retrieved target SHA256 : ${hash_value}"
           
           # 获取当前 Makefile 中该架构的 Hash 值
-          old_hash=$(awk "/ifeq (\$(ARCH),$arch)/,/endif/" "$QB_MAKEFILE_PATH" | grep -oP '^PKG_HASH:=\K.*' || true)
+          old_hash=$(awk "/ifeq (\$(ARCH),$arch)/,/endif/" "$QB_MAKEFILE_PATH" | grep -oP '^\s*PKG_HASH:=\K.*' || true)
           echo "    Current Makefile SHA256 : ${old_hash}"
           
           # 对比 Hash 值是否一致并进行替换
