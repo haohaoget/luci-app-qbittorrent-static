@@ -75,6 +75,8 @@ jobs:
     # 检查更新各个架构的 Hash 值
     - name: Update hashes for different architectures
       id: update_hashes
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         set -e 
     
