@@ -75,8 +75,6 @@ jobs:
     # 检查更新各个架构的 Hash 值
     - name: Update hashes for different architectures
       id: update_hashes
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         set -e 
     
@@ -87,7 +85,7 @@ jobs:
           ["arm"]="armv7"
         )
     
-        echo "==> Fetching Release metadata from GitHub API (Unauthenticated)..."
+        echo "==> Fetching Release metadata from GitHub API"
         API_URL="https://api.github.com/repos/userdocs/qbittorrent-nox-static/releases/tags/release-${FULL_VERSION}"
         RELEASE_JSON=$(curl -sL "$API_URL")
 
@@ -104,10 +102,15 @@ jobs:
           echo "---------------------------------------------------"
           echo "==> Checking architecture: ${arch} (${asset_name})"
           
-          # 策略 1: 尝试从 Release 资源的 label 字段中提取
-          hash_value=$(echo "$RELEASE_JSON" | jq -r ".assets[] | select(.name == \"$asset_name\") | .label // empty" | sed 's/^sha256://')
+          # 策略 1: 优先从 digest 字段提取 (最可靠的官方防篡改字段)
+          hash_value=$(echo "$RELEASE_JSON" | jq -r ".assets[] | select(.name == \"$asset_name\") | .digest // empty" | sed 's/^sha256://')
           
-          # 策略 2: 如果 label 提取不到，尝试使用正则从 Release 的 Markdown 文本(body)中精确匹配
+          # 策略 2: 如果 digest 没有，尝试从 label 字段提取
+          if [ -z "$hash_value" ] || [ "$hash_value" == "null" ]; then
+            hash_value=$(echo "$RELEASE_JSON" | jq -r ".assets[] | select(.name == \"$asset_name\") | .label // empty" | sed 's/^sha256://')
+          fi
+
+          # 策略 3: 作为最后手段，尝试从 Release 的 Markdown 文本(body)中精确匹配
           if [ -z "$hash_value" ] || [ "$hash_value" == "null" ]; then
             hash_value=$(echo "$RELEASE_JSON" | jq -r .body | grep -oP "${asset_name}.*sha256:\K[a-f0-9]{64}" || true)
           fi
