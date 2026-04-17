@@ -23,10 +23,12 @@ function getServiceStatus() {
 }
 
 function renderStatus(isRunning, webport) {
-	var spanTemp = '<span style="color:%s"><strong>%s %s<br>WebUI: %s</strong></span>';
+	var spanTemp = '<em><span style="color:%s"><strong>%s %s</strong></span></em>';
 	var renderHTML;
 	if (isRunning) {
-		renderHTML = spanTemp.format('green', _('qBittorrent'), _('RUNNING'), `${window.location.hostname}:${webport}`);
+		var button = String.format('<input class="cbi-button-reload" type="button" style="margin-left: 50px" value="%s" onclick="window.open(\'//%s:%s/\')">',
+			_('Open Web Interface'), window.location.hostname, webport);
+		renderHTML = spanTemp.format('green', _('qBittorrent'), _('RUNNING')) + button;
 	} else {
 		renderHTML = spanTemp.format('red', _('qBittorrent'), _('NOT RUNNING'));
 	}
