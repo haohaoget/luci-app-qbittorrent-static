@@ -7,6 +7,7 @@ The `luci-app-qbittorrent-static` project is a qBittorrent client for OpenWrt, u
 
 See: [qbittorrent-nox-static](https://github.com/userdocs/qbittorrent-nox-static)
 
+See: [luci-app-qbittorrent](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=1456090&extra=)
 ## Support Target
 Due to the use of a static binary from the qbittorrent-nox-static project, this project only supports **the following targets**:
 ```
@@ -27,7 +28,7 @@ You should **set your own password** in program preferences.
 Navigate to openwrt/package/ or another appropriate directory, then run the following commands to install luci-app-qbittorrent-static on OpenWrt:
 
 ``` bash
-git clone https://github.com/teleostnacl/luci-app-qbittorrent-static.git
+git clone https://github.com/haohaoget/luci-app-qbittorrent-static.git
 make menuconfig  # Select LUCI -> Applications -> luci-app-qbittorrent-static
 make V=s
 ```
