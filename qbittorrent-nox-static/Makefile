@@ -73,10 +73,9 @@ define Package/qbittorrent-nox-static/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(DL_DIR)/qbittorrent-nox-$(PKG_ARCH)-$(PKG_FULL_VERSION) $(1)/usr/bin/qbittorrent-nox
 
-	$(INSTALL_DIR) $(1)/etc/config $(1)/etc/init.d $(1)/usr/share/qbittorrent
+	$(INSTALL_DIR) $(1)/etc/init.d $(1)/etc/config
 	$(INSTALL_BIN) ./files/qbittorrent.init $(1)/etc/init.d/qbittorrent
-	$(INSTALL_CONF) ./files/qbittorrent.config $(1)/etc/config/qbittorrent
-	$(INSTALL_CONF) ./files/qBittorrent.conf.example $(1)/usr/share/qbittorrent/qBittorrent.conf.example
+	$(INSTALL_CONF) ./files/qbittorrent.conf $(1)/etc/config/qbittorrent
 endef
 
 $(eval $(call Download,qbittorrent-nox-static))

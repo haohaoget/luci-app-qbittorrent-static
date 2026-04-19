@@ -1,10 +1,10 @@
 {
 	"admin/services/qbittorrent": {
 		"title": "qBittorrent",
-		"order": 20,
+		"order": 90,
 		"action": {
 			"type": "view",
-			"path": "qbittorrent"
+			"path": "qbittorrent/qbittorrent"
 		},
 		"depends": {
 			"acl": [ "luci-app-qbittorrent" ],

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: GPL-2.0-only
+#
 # Copyright (C) 2019 Openwrt.org
 #
 # This is free software, licensed under the Apache License, Version 2.0 .
