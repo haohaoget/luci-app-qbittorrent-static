@@ -1,0 +1,36 @@
+#!/usr/bin/ucode
+
+'use strict';
+
+import { popen, mkdtemp } from 'fs';
+
+return {
+    'luci.qbittorrent': {
+        'get-version': {
+            // call 是当 ubus 调用此方法时执行的函数
+            call: function() {
+                // 使用 ucode 的 fs.mkdtemp 自动生成带随机后缀的临时目录
+                let tmp_path = mkdtemp('/var/run/qbittorrent_XXXXXX');
+                let version_str = '';
+
+                if (tmp_path) {
+                    // 运行命令获取版本信息（将 HOME 指向生成的临时目录）
+                    let pipe = popen(`HOME='${tmp_path}' /usr/bin/qbittorrent-nox -v 2>/dev/null`, 'r');
+                    if (pipe) {
+                        version_str = pipe.read('all') || '';
+                        pipe.close();
+                    }
+                    
+                    // 清理生成的临时目录（以防 qbittorrent 在里面写入了配置）
+                    system(`rm -rf '${tmp_path}'`);
+                }
+
+                // ucode 返回的字典对象，会被 rpcd 自动转化为正确的 JSON 响应发回前端
+                return {
+                    // trim() 是 ucode 全局函数，用于去除换行符和首尾空格
+                    version: trim(version_str)
+                };
+            }
+        }
+    }
+};
