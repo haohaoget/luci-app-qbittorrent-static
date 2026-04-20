@@ -17,7 +17,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v6
 
     # 获取qbittorrent-nox-static的最新版本
     - name: Get latest release version
