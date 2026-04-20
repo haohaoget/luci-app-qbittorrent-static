@@ -8,7 +8,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=qbittorrent-nox-static
 PKG_VERSION:=5.1.4
-PKG_RELEASE:=2
+PKG_RELEASE:=1
 
 PKG_FULL_VERSION:=5.1.4_v2.0.12
 
