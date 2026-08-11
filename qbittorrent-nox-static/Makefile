@@ -8,30 +8,30 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=qbittorrent-nox-static
 PKG_VERSION:=5.2.3
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
-PKG_FULL_VERSION:=5.2.3_v2.0.13
+PKG_FULL_VERSION:=5.2.3_v2.0.14
 
 STRIP:=true
 
 ifeq ($(ARCH),i386)
 	PKG_ARCH:=x86
-	PKG_HASH:=864fe8dda80f35bf51a688b4cfb475b6bbf341440e159aafdb0b725745912584
+	PKG_HASH:=e706ba4c1eb335a1fab7fe145185328bec71be4c8b4c9754fe736a3ef2e0531c
 endif
 
 ifeq ($(ARCH),x86_64)
 	PKG_ARCH:=x86_64
-	PKG_HASH:=748ed3fcbcde463abacbb8d9a27d4061a6287a2382bdf154fcffc9f06d6eeb7d
+	PKG_HASH:=7a93b9ae36b200aff25a074e167aff95cefc78b7d17a963620cd0d095bbbc0e5
 endif
 
 ifeq ($(ARCH),aarch64)
 	PKG_ARCH:=aarch64
-	PKG_HASH:=0258568fb81e644d843c3d9bce87447a02f4f445b673751b48a6dc8652c9124d
+	PKG_HASH:=7f85b717610d405985b4f970c90ffef7ad4ac8adbaa2cc7871f866ed629de2a7
 endif
 
 ifeq ($(ARCH),arm)
 	PKG_ARCH:=armv7
-	PKG_HASH:=b785737a36081f440c2edcb641f22b1a927580c278f36a85eab8780cbc4c0488
+	PKG_HASH:=5ab48605db9db8cbcecbfa48e6da902259221d965bd3ff540b11bbf099ebd4f4
 endif
 
 include $(INCLUDE_DIR)/package.mk
